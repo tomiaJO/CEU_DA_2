@@ -78,3 +78,47 @@ quantile(df_filtered$price_online, pct)
 
 ## Q: Are there any differences between these statistics?
 ## A: 
+
+### Question 5.
+
+## Q: Create a variable two variables in your dataset: i) variance of the price variable, 
+## A:
+price_var <- sum( (df_filtered$price - mean(df_filtered$price)) ^ 2 ) / nrow(df_filtered)
+
+## Q: and ii) it’s standard deviation (using the formula included in your Handout and Slides). 
+## A:
+price_std_dev <- price_var ^ .5
+
+## Q: How do they compare to the variance and standard deviations you got using Built-in commands
+## A:
+price_var
+var(df_filtered$price)
+
+price_std_dev
+sd(df_filtered$price)
+
+# ?sd
+# ?var
+
+## A cont'd: They are slightly different, as R uses a denominator of n - 1 in its built-in 
+## formulas, to create unbiased estimators (it assumes it runs on a sample of the population basically)
+
+### Question 6.
+## Q: Create a dummy (indicator) variable in case the price is greater than the online price.
+## A: 
+df_filtered$dummy1 <- df_filtered$price > df_filtered$price_online
+
+summary(df_filtered$dummy1)
+
+### Question 7.
+## Q: Create a variable that is the difference between the price and online price. Call this variable diff_price. 
+## A: 
+df_filtered$diff_price <- df_filtered$price - df_filtered$price_online
+
+## Q: Create a dummy variable taking value one if the diff_price is positive. 
+## A:
+df_filtered$dummy2 <- df_filtered$diff_price > 0
+
+## Q: How does this variable compare to the one above?
+## A: they are exactly the same, see below
+summary(df_filtered$dummy1 == df_filtered$dummy2)
