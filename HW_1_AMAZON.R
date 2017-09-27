@@ -34,10 +34,21 @@ df_filtered <- df_filtered[df_filtered$price_online <= quantile(df_filtered$pric
 ## A: Outliers
 
 ## Q: Make an argument on why should we keep them in the sample. 
-## A: 
+## A: Generally, in absence of data quality issues, every observation in the sample carries added value.
+## This means that disregarding them from the analysis might be misleading, as we are not considering valid data.
+## Most cases, withour proper understanding (more on this in the next answer) of outliers, they should not 
+## be removed.
 
 ## Q: Make another argument on why should we drop them.
-## A: 
+## A: Easiest explanation is that they could carry data issues, and might not be valid observations.
+## But let's consider another reason: there might be a reason of them being outliers, which are not
+## captured in our variables, and we might be fine with that. A silly example could be the following:
+## consider we want to build a model to explain house prices in our neighbourhood. There is one outlier, 
+## where the price is double per sqr meter compared to other examples. With understanding our data, we
+## get to know that that house was owned by a celebrity. If we want to model general house prices, we
+## obviously know that celebrities are rare in the area, hence this one example might not be descriptive
+## for others, and we could decide that we rather have a simpler model disregarding this attribute, than 
+## trying to model this special circumstance.
 
 
 ### Question 3.
@@ -122,3 +133,11 @@ df_filtered$dummy2 <- df_filtered$diff_price > 0
 ## Q: How does this variable compare to the one above?
 ## A: they are exactly the same, see below
 summary(df_filtered$dummy1 == df_filtered$dummy2)
+
+### Question 8.
+## Q: How often do you observe a positive value for the diff_price? 
+
+##TODO
+hist(df_filtered$diff_price)
+
+## Q: How often do you observe no price difference between online and offline prices?
