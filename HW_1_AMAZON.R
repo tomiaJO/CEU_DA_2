@@ -137,7 +137,68 @@ summary(df_filtered$dummy1 == df_filtered$dummy2)
 ### Question 8.
 ## Q: How often do you observe a positive value for the diff_price? 
 
-##TODO
-hist(df_filtered$diff_price)
+## A:
+nrow(df_filtered[(df_filtered$diff_price > 0) , ])
 
 ## Q: How often do you observe no price difference between online and offline prices?
+## A:
+nrow(df_filtered[(df_filtered$diff_price == 0) , ])
+
+### Question 9.
+## Q: What is the probability of observing a positive price difference 
+## if the good category is Electronics?
+
+## A: we'll call this probability p1 -- answer is .23
+## calculation: number of positives differences in Electronics vs all Electronics observations
+p1 <- nrow(df_filtered[df_filtered$diff_price = 0 & 
+                         df_filtered$category == 'Electronics' , ]) / 
+      nrow(df_filtered[df_filtered$category == 'Electronics' , ])
+
+#hist(df_filtered[df_filtered$category == 'Electronics' , 21])
+
+p1
+
+## Q: What is the probability of observing a zero price difference 
+## for the category Home and Appliances?
+
+## A: we'll call this probability p2 -- answer is .90
+## calculation: number of 0 differences in H&A vs all H&A observations
+p2 <- nrow(df_filtered[df_filtered$diff_price == 0 & 
+                         df_filtered$category == 'Home and Appliances' , ]) / 
+  nrow(df_filtered[df_filtered$category == 'Home and Appliances' , ])
+
+hist(df_filtered[df_filtered$category == 'Home and Appliances' , 21])
+
+p2
+
+
+### Question 10.
+## Q: Create a scatterplot with price and online price
+## A:
+plot(df_filtered$price, df_filtered$price_online)
+
+## Q: Interpret it. 
+## A: Normally the two prices are the same (or very close), with a few outliers.
+
+## Q: Create a scatterplot with price and amazon price. 
+## A:
+plot(df_filtered$price, df_filtered$price_amazon)
+
+## Q: Interpret it. 
+## A: Interestingly there seems to be more difference in prices than in the previous example.
+## There are certain very high outliers (where amazon price is bigger) -- it's worth to note that
+## in the beginning, we have not removed outliers based on the amazon price, which could
+## be an explanation.
+
+## Q: Do you see any between these two scatterplots? What are they telling
+## us about the correlation between these variables?
+## A: The first scatterplot is closer to expectations (not much difference) than the second.
+## We should expect high correlation in the first case, and somewhat lower for the second.
+## (actual correlations calculated below for reference)
+
+cor(df_filtered$price, df_filtered$price_online)
+cor(df_filtered$price, df_filtered$price_amazon)
+
+### Question 11.
+
+
