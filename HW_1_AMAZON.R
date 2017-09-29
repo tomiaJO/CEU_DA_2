@@ -200,5 +200,21 @@ cor(df_filtered$price, df_filtered$price_online)
 cor(df_filtered$price, df_filtered$price_amazon)
 
 ### Question 11.
+## Q: Make box plots and histograms for the price difference over the 
+## categories Electronics and Pharmacy and Health. 
+boxplot(df_filtered[df_filtered$category == 'Electronics', 21])
+hist(df_filtered[df_filtered$category == 'Electronics', 21])
+boxplot(df_filtered[df_filtered$category == 'Home and Appliances', 21])
+hist(df_filtered[df_filtered$category == 'Home and Appliances', 21])
 
+## Q: What can you tell us about variation in this variable? 
+## A: We can see that most of the items are zero, with a few outliers (as expected).
+## Also, seems like that there are bigger and more outliers for Electronics, however
+## this can be explained by the difference in the distribution of the price
+## variable in general:
+hist(df_filtered[df_filtered$category == 'Electronics', 4])
+hist(df_filtered[df_filtered$category == 'Home and Appliances', 4])
 
+## Q: In which plot, histogram or boxplot, is easier to see the quartiles of the distribution?
+## A: In the boxplot, as it shows the actual quartiles (top and bottom of the box). The histogram
+## does give a great overview of the distributions, but does not show specific descriptives (median, quartiles, etc.) explicitly.
