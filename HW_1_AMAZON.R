@@ -1,16 +1,22 @@
+## GROUP: 11
+## AUTHOR(S): Lilla Tagai, Monika Mira Szamohval, Tamas Koncz
 
-## user notes - some lines are commented out with a single '#'
+## note: all results, and answers to the questions are included here (no separate pdf attached),
+## for the sake of clarity. (Our intention was to create an R markdown file, however for some reason
+## it did not work on multiple devices, apologies for that, next time we'll hopefully do better)
+
+## about user notes - some lines are commented out with a single '#'
 ## as it is not needed for solving the exercise, 
 ## just used for checking results or data understanding
 
 
 ### Question 1.
 ## Q: Use the amazon_compare.csv file and choose a city to analyze. (Load it into Stata or R)
-
+getwd()
 ## A: 
 df <- read.csv('amazon_compare.csv', header = TRUE)
 
-# head(df)
+#head(df)
 # str(df)
 # names(df)
 
@@ -60,6 +66,7 @@ set.seed(11)
 
 ## A: std normal distribution, mu = 0, sigma = 1, 10000 runs
 id_rand <- rnorm(10000, 0, 1)
+?rnorm
 
 ## Q: Sort the variable and select the first 1000 observation in your dataset
 
@@ -88,7 +95,21 @@ quantile(df_filtered$price, pct)
 quantile(df_filtered$price_online, pct)
 
 ## Q: Are there any differences between these statistics?
-## A: 
+## A: Mean is the average price per item. 
+#Standard deviation is the amount of variation in the data values (ie the distance of the farthest data points) 
+#in the data set. In this case: The SD for the variable “price” is significantly lower 
+#than the SD for the variable “price_online”, meaning that the data points for “price” are much closer to it’s mean 
+#(ie the dataset is much less spread).
+
+#Quartiles are the three points that divide the data set into four equal groups, 
+#each group comprising a quarter of the data.
+#In this case: The range of the prices grows with each quartile, the 4th quartile having the largest range 
+#(ie. the standard deviation of most expensive items is  the largest), the dataset is skewed to the right
+
+
+#Percentile a measure indicating the value below which a given percentage of observations in a group of observations fall.
+#In this dataset the same increasing trend that applies for percentiles as for quartiles, 
+#with the dataset being skewed to the right and the last percentile highly deviating from the rest of the dataset.
 
 ### Question 5.
 
@@ -150,9 +171,9 @@ nrow(df_filtered[(df_filtered$diff_price == 0) , ])
 
 ## A: we'll call this probability p1 -- answer is .23
 ## calculation: number of positives differences in Electronics vs all Electronics observations
-p1 <- nrow(df_filtered[df_filtered$diff_price = 0 & 
+p1 <- nrow(df_filtered[df_filtered$diff_price > 0 & 
                          df_filtered$category == 'Electronics' , ]) / 
-      nrow(df_filtered[df_filtered$category == 'Electronics' , ])
+  nrow(df_filtered[df_filtered$category == 'Electronics' , ])
 
 #hist(df_filtered[df_filtered$category == 'Electronics' , 21])
 
@@ -167,7 +188,7 @@ p2 <- nrow(df_filtered[df_filtered$diff_price == 0 &
                          df_filtered$category == 'Home and Appliances' , ]) / 
   nrow(df_filtered[df_filtered$category == 'Home and Appliances' , ])
 
-hist(df_filtered[df_filtered$category == 'Home and Appliances' , 21])
+#hist(df_filtered[df_filtered$category == 'Home and Appliances' , 21])
 
 p2
 

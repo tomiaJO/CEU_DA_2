@@ -1,6 +1,7 @@
 ---
 title: "HW_AMAZON_1"
 output: html_document
+authors(s): Lilla Tagai, Monika Mira Szamohval, Tamas Koncz
 ---
 
 ```{r setup, include=FALSE}
